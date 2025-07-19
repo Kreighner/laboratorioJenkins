@@ -1,19 +1,15 @@
 pipeline {
-    agent any
-
-    stages {
-        stage('Checkout') {
-            steps {
-                // Clona el repositorio desde GitHub
-                git 'https://github.com/Kreighner/laboratorioJenkins.git'
-            }
+    agent {
+        docker {
+            image 'maven:3.8.7-openjdk-17'
         }
-
+    }
+    stages {
         stage('Compilar Java (Maven)') {
             steps {
-                // Ejecuta Maven directamente
                 sh 'mvn clean install'
             }
         }
     }
 }
+
