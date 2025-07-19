@@ -2,9 +2,17 @@ pipeline {
     agent any
 
     stages {
-        stage('Verificación') {
+        stage('Checkout') {
             steps {
-                echo "¡Pipeline ejecutado correctamente!"
+                // Clona el repositorio desde GitHub
+                git 'https://github.com/Kreighner/laboratorioJenkins.git'
+            }
+        }
+
+        stage('Compilar Java (Maven)') {
+            steps {
+                // Ejecuta Maven directamente
+                sh 'mvn clean install'
             }
         }
     }
